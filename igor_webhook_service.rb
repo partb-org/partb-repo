@@ -41,7 +41,10 @@ def protect(pay_load)
 	
 	# Authenticate
 	puts "Authenticating with GitHub API"
-	client_inst = Octokit::Client.new(:login => 'igorgvero', :password => ENV['GH_API_TOKEN'])
+	client_inst = Octokit::Client.new(:access_token => ENV['GH_API_TOKEN'])
+
+	# Sleep two seconds and allow for repo to initiate main branch
+	sleep(2)
 
 	# Protect
 	puts "Adding protection"
@@ -54,6 +57,8 @@ def protect(pay_load)
 	# Close the issue
 	puts "Closing an issue"
 	client_inst.close_issue(repo, issue["number"])
+
+	puts "Completed"
 
 end
 
