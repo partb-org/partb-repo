@@ -14,7 +14,3 @@ Sample GitHub API webservice listening for a webhook invocation that has been pr
 2. Run the service: ```ruby igor_webhook_service.rb```
 3. Run ngork: ```ngrok http 4567```
 4. Create a new repository and initialize with README (to guarantee at least one commit in the main branch)
-
-## Troubleshooting
-
-The app is currently having issues aithenticating against GitHub API. In progress of identifying the problem...
