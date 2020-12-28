@@ -40,25 +40,33 @@ def protect(pay_load)
 	puts "Working on repository: #{repo}"
 	
 	# Authenticate
-	puts "Authenticating with GitHub API"
+	puts "Authenticating with GitHub API..."
 	client_inst = Octokit::Client.new(:access_token => ENV['GH_API_TOKEN'])
 
-	# Sleep two seconds and allow for repo to initiate main branch
-	sleep(2)
-
 	# Protect
-	puts "Adding protection"
-	client_inst.protect_branch(repo, "main", opts)
+	puts "Adding protection..."
+	created = 0
+	while created != 1 do
+		begin
+			client_inst.protect_branch(repo, "main", opts)
+		rescue
+			puts "Waiting for main branch to be created..."
+		else
+			created = 1
+			puts "Main branch now available"
+		end	
+	end 
+	puts "Protection added"
 
 	# Create the issue and notify
-	puts "Opening an issue and notifying"
+	puts "Opening an issue and notifying..."
 	issue = client_inst.create_issue(repo,"Main branch protection enabled","@igorgvero Main branch is now safe")
 
 	# Close the issue
-	puts "Closing an issue"
+	puts "Closing an issue..."
 	client_inst.close_issue(repo, issue["number"])
 
-	puts "Completed"
+	puts "Completed!"
 
 end
 
