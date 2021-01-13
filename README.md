@@ -5,7 +5,7 @@ Sample GitHub API webservice listening for a webhook invocation that has been pr
 ## Requirements
 
 1. Sinatra - > Ruby service
-2. ngork - > Tunneling to local machine
+2. ngrok - > Tunneling to local machine
 3. Octokit - > Ruby toolkit for the GitHub API
 
 ## Steps
@@ -14,3 +14,8 @@ Sample GitHub API webservice listening for a webhook invocation that has been pr
 2. Run the service: ```ruby igor_webhook_service.rb```
 3. Run ngork: ```ngrok http 4567```
 4. Create a new repository and initialize with README (to guarantee at least one commit in the main branch)
+
+## Future
+
+- Expand the README, add more detailed steps and screenshots
+- Add additional webhook/service features
